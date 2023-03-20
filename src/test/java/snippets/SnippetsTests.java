@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.data.MapEntry;
 
 public class SnippetsTests {
 
@@ -328,7 +329,10 @@ public class SnippetsTests {
         obj.put("c", 3);
 
         Map<String, Integer> picked = Snippets.pick(obj, new String[]{"a", "c"});
-        assertThat(picked).containsExactly(new SimpleEntry<>("a", 1), new SimpleEntry<>("c", 3));
+        assertThat(picked).containsOnly(
+        MapEntry.entry("a", 1),
+        MapEntry.entry("c", 3)
+    );
     }
 
     @Test
