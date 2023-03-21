@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.data.MapEntry;
 
 public class SnippetsTests {
 
@@ -229,9 +230,9 @@ public class SnippetsTests {
     public void group_elements_by_length() throws Exception {
         Map<Integer, List<String>> groups = Snippets.groupBy(new String[]{"one", "two", "three"}, String::length);
         assertThat(groups)
-                .containsExactly(
-                        new SimpleEntry<>(3, Arrays.asList("one", "two")),
-                        new SimpleEntry<>(5, Collections.singletonList("three"))
+                .containsOnly(
+                        MapEntry.entry(3, Arrays.asList("one", "two")),
+                        MapEntry.entry(5, Collections.singletonList("three"))
                 );
     }
 
@@ -328,7 +329,10 @@ public class SnippetsTests {
         obj.put("c", 3);
 
         Map<String, Integer> picked = Snippets.pick(obj, new String[]{"a", "c"});
-        assertThat(picked).containsExactly(new SimpleEntry<>("a", 1), new SimpleEntry<>("c", 3));
+        assertThat(picked).containsOnly(
+        MapEntry.entry("a", 1),
+        MapEntry.entry("c", 3)
+    );
     }
 
     @Test
