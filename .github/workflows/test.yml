@@ -12,7 +12,7 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
       - name: Test
-        run: mvn test -pl . -Dtest=snippets.SnippetsTests#pick_should_pick_key_pairs_corresponding_to_keys
+        run: mvn test -pl . -Dtest=snippets.SnippetsTests#union_test
         
   Test_With_Nondex_Shuffling:
     runs-on: ubuntu-latest
@@ -24,5 +24,5 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
       - name: Test
-        run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=snippets.SnippetsTests#pick_should_pick_key_pairs_corresponding_to_keys
+        run: mvn edu.illinois:nondex-maven-plugin:2.1.1:nondex -pl . -DnondexRuns=10 -Dtest=snippets.SnippetsTests#union_test
         

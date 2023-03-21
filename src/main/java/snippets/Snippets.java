@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -464,9 +465,9 @@ public abstract class Snippets {
     }
 
     public static <T> T[] union(T[] first, T[] second) {
-        Set<T> set = new HashSet<>(Arrays.asList(first));
+        Set<T> set = new LinkedHashSet<>(Arrays.asList(first));
         set.addAll(Arrays.asList(second));
-        return set.toArray((T[]) Arrays.copyOf(new Object[0], 0, first.getClass()));
+        return set.toArray(Arrays.copyOf(first, set.size()));
     }
 
     public static <T> T[] without(T[] arr, T... elements) {
